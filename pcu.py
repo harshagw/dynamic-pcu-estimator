@@ -4,8 +4,7 @@ from pprint import pprint
 import time
 
 
-def pcu_calculator(input1, input2):
-    distance = 62
+def pcu_calculator(input1, input2, distance=62, time_interval_value=300):
 
     df = pd.read_csv(input1)
     areas = pd.read_csv(input2)
@@ -17,10 +16,10 @@ def pcu_calculator(input1, input2):
 
     time_interval_last_value = math.ceil(df.iloc[-1]['Exit'])
 
-    total = math.ceil(time_interval_last_value / 300)
+    total = math.ceil(time_interval_last_value / time_interval_value)
 
     for i in range(1, total + 1):
-        df.at[i - 1, 'Time Interval'] = i * 300
+        df.at[i - 1, 'Time Interval'] = i * time_interval_value
 
     df['Cumulative Entry Flow'] = 0
 
@@ -90,10 +89,10 @@ def pcu_calculator(input1, input2):
             speed_sum = 0
 
             for k in range(0, df.shape[0]):
-                if df.at[k, 'Exit'] < df.at[j, 'Time Interval'] and df.at[k, 'Vehicle Type'] == areas.at[
-                    i, 'Vehicle Type']:
-                    count += 1
-                    speed_sum += df.at[k, 'Speed']
+                if df.at[k, 'Exit'] < df.at[j, 'Time Interval']:
+                    if df.at[k, 'Vehicle Type'] == areas.at[i, 'Vehicle Type']:
+                        count += 1
+                        speed_sum += df.at[k, 'Speed']
 
             df.at[j, areas.at[i, 'Category'] + ' First'] = count
             df.at[j, areas.at[i, 'Category'] + ' Speed First'] = speed_sum
@@ -147,8 +146,8 @@ def pcu_calculator(input1, input2):
 
     # FINAL VALUES
 
-    df['PCU/5min'] = 0
-    df['PCU/Hr'] = 0
+    df['PCU/Interval'] = 0
+    # df['PCU/Hr'] = 0
     df['Density'] = 0
 
     for i in range(0, total):
@@ -158,10 +157,10 @@ def pcu_calculator(input1, input2):
             count += (df.at[i, areas.at[j, 'Category'] + ' Individual PCU Values in each time Interval'] * df.at[
                 i, areas.at[j, 'Category'] + ' Cumulative'])
 
-        df.at[i, 'PCU/5min'] = count
-        df.at[i, 'PCU/Hr'] = 12 * count
+        df.at[i, 'PCU/Interval'] = count
+        # df.at[i, 'PCU/Hr'] = 12 * count
 
-        if df.at[i, 'PCU/Hr'] != 0:
-            df.at[i, 'Density'] = df.at[i, 'PCU/Hr'] / df.at[i, 'SMS']
+        # if df.at[i, 'PCU/Hr'] != 0:
+        #     df.at[i, 'Density'] = df.at[i, 'PCU/Hr'] / df.at[i, 'SMS']
 
     return df
