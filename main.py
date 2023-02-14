@@ -3,9 +3,7 @@ import pandas as pd
 from pcu import pcu_calculator
 import math
 
-"""
-# Dynamic PCU Estimator
-"""
+st.title("Dynamic PCU Estimator")
 
 distance = st.number_input(step=1, min_value=1, value=62, label="Distance")
 interval = st.number_input(step=60, min_value=60, value=300, label="Time Interval")
