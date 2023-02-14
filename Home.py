@@ -3,6 +3,10 @@ import pandas as pd
 from pcu import pcu_calculator
 import math
 
+st.set_page_config(
+    page_title="Dynamic PCU Estimator",
+)
+
 st.title("Dynamic PCU Estimator")
 
 distance = st.number_input(step=1, min_value=1, value=62, label="Distance")
@@ -22,13 +26,13 @@ if input1 is not None and input2 is not None and distance is not None and interv
         input2.seek(0)
 
         if "Category" not in areas.columns or "Vehicle Type" not in areas.columns or "Area" not in areas.columns:
-            st.error("Please check the Area File. It should contain 'Category', 'Vehicle Type' and 'Area' columns. Please reload")
-            st.button("Re-run")
+            st.error(
+                "Please check the Area File. It should contain 'Category', 'Vehicle Type' and 'Area' columns. Please reload")
             st.stop()
 
         if "Vehicle Type" not in df.columns or "Entry" not in df.columns or "Exit" not in df.columns:
-            st.error("Please check the Input File. It should contain 'Vehicle Type', 'Entry' and 'Exit' columns. Please reload")
-            st.button("Re-run")
+            st.error(
+                "Please check the Input File. It should contain 'Vehicle Type', 'Entry' and 'Exit' columns. Please reload")
             st.stop()
 
         output = pcu_calculator(input1, input2, distance, interval)
