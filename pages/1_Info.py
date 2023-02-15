@@ -7,11 +7,13 @@ st.set_page_config(
 st.title("Estimation of Dynamic PCU")
 
 st.write(
-    """Passenger Car Unit (PCU) is a metric used in Transportation Engineering, to assess traffic-flow rate on a highway. It is a measure of the impact that a mode of transport has on traffic variables.
+    """Transportation engineering is essential for designing and managing highways and roads to ensure smooth and safe traffic flow. One important metric used in transportation engineering is the Passenger Car Unit (PCU), which quantifies the impact of a vehicle on traffic flow by measuring the number of passenger cars displaced in traffic by a given vehicle. In this project, we aim to estimate the dynamic PCU on a highway based on distance, time interval, and vehicle type input.
 
-It can be defined as the number of passenger cars displaced in the traffic flow by a truck or a bus, under prevailing roadway and traffic conditions or the number of passenger cars which will result in the same operational condition as a single heavy vehicle of a particular type under specified roadway, traffic and control conditions.
+Our project takes input data consisting of the distance under observation , time interval the vehicle spent, type of vehicle for each vehicle class and no. of lanes .Each type of vehicle is designated with a vehicle class . Using this input data, our estimation method calculates the PCU per time interval and total PCU per hour for each vehicle class.
 
-The project focuses on the estimation of dynamic PCU using data consisting of entry and exit time of individual vehicles and projected area of these vehicle classes. PCU per 5 minute interval and Total PCU per hour is estimated using the data for 7 different vehicle classes i.e Small Car, Big Car, Two Wheeler, LCV, Bus, Single Axle and Multi Axle.
-The program uses Chandra's method for PCU estimation which uses speeds and projected areas of different vehicle classes.
+Our estimation method takes into account the impact of different types of vehicles on traffic flow, with heavier or larger vehicles having a greater impact than smaller ones. The method uses Chandra's method, which takes into account the speeds and projected areas of the different vehicle classes to calculate the PCU per time interval and total PCU per hour.
+
+Accurate PCU estimation is critical for transportation engineering, as it provides important insights into traffic flow patterns and helps in designing and managing highways and roads. By understanding the impact of different types of vehicles on traffic flow, engineers can make informed decisions about road widening, lane addition, traffic signal timings, and other interventions that can help improve traffic flow and reduce congestion. 
+
 """
 )
